@@ -1,4 +1,4 @@
-import React, {useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import Card from '../UI/Card';
 import Button from '../UI/Button';
@@ -13,7 +13,7 @@ const AddUser = (props) => {
   const [error, setError] = useState();
 
   const addUserHandler = (event) => {
-    
+
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
     const enteredAge = ageInputRef.current.value
@@ -34,8 +34,11 @@ const AddUser = (props) => {
       return;
     }
     props.onAddUser(enteredName, enteredAge);
-  nameInputRef.current.value = "";
-  ageInputRef.current.value = "";
+    /*Aca React no hace nada(el "value" esla api del dom normal) solo obtiene los datos,pero si estuvieramos usando estados serian controlados,
+    porque ls datos los vamos manipulando setInName(actualizar) */
+    /*Aca no estamos controlando el estado del elemento(del input en este caso) */
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
 
 
@@ -61,6 +64,11 @@ const AddUser = (props) => {
             ref={nameInputRef}
           />
           <label htmlFor="age">Age (Years)</label>
+          { /*Componentes no controlados */}
+          {/*Los refs son componentes no controlados y por lo general todos los inputs son elementos no controlados */}
+          {/*Con REFS Son componentes no controlados porque sus valores(estados) son internos(los datos los va a escribir
+           el usuario por ejemplo y react solo lo recibe) y no los controla react */}
+          {/*con STATE serian componentes controlados por los estados, los manipulariamos y actualizariamos nosotros */}
           <input
             id="age"
             type="number"
